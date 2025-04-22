@@ -1,39 +1,46 @@
-# Commands
+### Addresses
+Deployer: `0xb3071bc8838cab347BE299C42F8EDD0fb484D946`
+Sepolia Contract: `0x5b2B598f436c4A69266BD03a6aF3A45b69e376c6`
 
+# Commands
 ### Build
 ```shell
 $ forge build
 ```
 
-### Check balance
+### Cast
 ```bash
+source .env
+
+cast wallet list
+
+cast wallet address --account DEPLOYER
+
 cast balance --rpc-url $SEPOLIA_RPC_URL 0xb3071bc8838cab347BE299C42F8EDD0fb484D946
 ```
 - Replace with `$MAINNET_RPC_URL` for mainnet
 
-### Test
+### Deploy scripts
+See `script/Constants.sol` for constructor addresses by chain
 
+Sepolia:
+```bash
+source .env
+forge script --chain sepolia script/Deploy.s.sol:DeployPoolTrackerScript --rpc-url $SEPOLIA_RPC_URL --account DEPLOYER --broadcast --via-ir --verify
+```
+Mainnet:
+```bash
+source .env
+forge script --chain mainnet script/Deploy.s.sol:DeployPoolTrackerScript --rpc-url $MAINNET_RPC_URL --account DEPLOYER --broadcast --via-ir --verify
+```
+
+
+
+### Test
+TODO
 ```shell
 $ forge test
 ```
-
-### Deploy
-Sepolia:
-```bash
-forge create ./src/PoolTracker.sol:PoolTracker --rpc-url $SEPOLIA_RPC_URL --account DEPLOYER --broadcast --constructor-args 0xE03A1074c86CFeDd5C142C4F04F1a1536e203543
-```
-
-Mainnet: 
-```bash
-forge create ./src/PoolTracker.sol:PoolTracker --constructor-args "0x000000000004444c5dc75cB358380D2e3dE08A90" --rpc-url $MAINNET_RPC_URL --account DEPLOYER
-```
-
-### Verify
-Sepolia:
-```bash
-forge verify-contract <DEPLOYED_ADDRESS> ./src/PoolTracker.sol:PoolTracker --chain sepolia --watch --etherscan-api-key PT5B57P5F2G1FTE16J2SUTXJYQ1EUWVGFY --constructor-args $(cast abi-encode "constructor(address)" 0xE03A1074c86CFeDd5C142C4F04F1a1536e203543)
-```
-- remove `--chain sepolia` flag to default to mainnet
 
 ### Format
 
