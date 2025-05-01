@@ -28,7 +28,15 @@ contract DeployPoolTrackerScript is Script, Constants {
             poolManager = POOLMANAGER_SEPOLIA;
             posm = POSM_SEPOLIA;
             permit2 = PERMIT2_SEPOLIA;
-        } else {
+        } else if (chainId == 130) { // Unichain
+            poolManager = POOLMANAGER_UNICHAIN;
+            posm = POSM_UNICHAIN;
+            permit2 = PERMIT2_UNICHAIN;
+        } else if (chainId == 1301) { // Unichain Sepolia
+            poolManager = POOLMANAGER_UNICHAIN_SEPOLIA;
+            posm = POSM_UNICHAIN_SEPOLIA;
+            permit2 = PERMIT2_UNICHAIN_SEPOLIA;
+        }else {
             revert("Unsupported chain ID");
         }
     }

@@ -5,7 +5,7 @@ Sepolia Contract: `0x5b2B598f436c4A69266BD03a6aF3A45b69e376c6`
 # Commands
 ### Build
 ```shell
-$ forge build
+$ forge build --via-ir
 ```
 
 ### Cast
@@ -34,7 +34,17 @@ source .env
 forge script --chain mainnet script/Deploy.s.sol:DeployPoolTrackerScript --rpc-url $MAINNET_RPC_URL --account DEPLOYER --broadcast --via-ir --verify
 ```
 
+Unichain:
+```bash
+source .env
+forge script --chain-id 130 script/Deploy.s.sol:DeployPoolTrackerScript --rpc-url $UNICHAIN_RPC_URL --account DEPLOYER --broadcast --via-ir --verify
+```
 
+Unichain Sepolia:
+```bash
+source .env
+forge script --chain unichain-sepolia script/Deploy.s.sol:DeployPoolTrackerScript --rpc-url $UNICHAIN_SEPOLIA_RPC_URL --account DEPLOYER --broadcast --via-ir --verify
+```
 
 ### Test
 TODO
@@ -78,4 +88,10 @@ $ cast <subcommand>
 $ forge --help
 $ anvil --help
 $ cast --help
+```
+
+### Verify
+
+```bash
+$ forge verify-contract --chain-id <chain-id> <contract-address> src/PoolTracker.sol:PoolTracker
 ```
